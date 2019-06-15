@@ -12,7 +12,7 @@
         >
           <v-text-field
             label="テーマ"
-            value="test"
+            :value="event.theme"
             readonly
           />
         </v-flex>
@@ -24,7 +24,7 @@
         >
           <v-text-field
             label="場所"
-            value="test"
+            :value="event.address"
             readonly
           />
         </v-flex>
@@ -93,8 +93,12 @@
         search: ''
       }
     },
+    computed: {
+      event () {
+        return EventStore.getters.event
+      }
+    },
     mounted () {
-      console.log(this.$route.query.eventId)
       EventStore.dispatch('getEvent', this.$route.query.eventId)
     },
     methods: {

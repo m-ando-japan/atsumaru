@@ -7,13 +7,16 @@ Vue.use(Vuex)
 //  データストア
 var EventStore = new Vuex.Store({
     state: {
-      property: {
-        event: 'Loading.....'
-      }
+      event: 'Loading.....'
     },
     mutations: {
       getEvent (state, response) {
-        state.property.nickname = response.data.nickname
+        state.event = response.data
+      }
+    },
+    getters: {
+      event (state, getters, rootState, rootGetters) {
+        return state.event
       }
     },
     actions: {
