@@ -14,7 +14,7 @@ var EventStore = new Vuex.Store({
     mutations: {
       getEvent (state, response) {
         state.property.nickname = response.data.nickname
-      },
+      }
     },
     actions: {
         getEvent ({ commit }, eventId) {
@@ -24,7 +24,7 @@ var EventStore = new Vuex.Store({
               commit('getEvent', response)
             }
           })
-      },
+      }
     }
   })
   export default EventStore

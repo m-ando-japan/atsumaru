@@ -16,7 +16,7 @@ export default new Router({
     {
       path: '/view',
       name: 'view',
-      component: () => import( './components/ViewEvent.vue')
+      component: () => import('./components/ViewEvent.vue')
     }
   ]
 })

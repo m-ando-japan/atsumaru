@@ -38,7 +38,6 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended",
       "vuetify"
     ],
     "rules": {},

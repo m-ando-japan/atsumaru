@@ -1,5 +1,5 @@
 <template>
-<span>
-TEST
-</span>
+  <span>
+    TEST
+  </span>
 </template>

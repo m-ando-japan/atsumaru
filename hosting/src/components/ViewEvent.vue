@@ -1,89 +1,119 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout row wrap>
-        <v-flex xs12 sm6 md3>
-          <v-text-field 
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex
+          xs12
+          sm6
+          md3
+        >
+          <v-text-field
             label="テーマ"
             value="test"
-            readonly>
-          </v-text-field>
+            readonly
+          />
         </v-flex>
 
-        <v-flex xs12 sm6 md3>
-          <v-text-field 
-            label="場所" 
+        <v-flex
+          xs12
+          sm6
+          md3
+        >
+          <v-text-field
+            label="場所"
             value="test"
-            readonly>
-          </v-text-field>
-        </v-flex>
-        
-        <v-flex xs12>
-          <v-chip v-for="tag in select"
-                      :key="tag"
-                      color="success" 
-                      text-color="white">
-            <v-icon left>label</v-icon>{{tag}}
-          </v-chip>  
+            readonly
+          />
         </v-flex>
 
         <v-flex xs12>
-          <v-btn block color="success">参加</v-btn>  
+          <v-chip
+            v-for="tag in select"
+            :key="tag"
+            color="success"
+            text-color="white"
+          >
+            <v-icon left>
+              label
+            </v-icon>
+            {{ tag }}
+          </v-chip>
         </v-flex>
-        <v-flex xs12>    
-          <v-btn block color="success">開催</v-btn> 
-        </v-flex>     
+
         <v-flex xs12>
-          <v-btn block color="success">編集</v-btn>  
-        </v-flex>   
-        <v-flex xs12> 
-          <v-btn @click="shareOnTwitter" block color="success">シェア</v-btn> 
-        </v-flex>     
-        
+          <v-btn
+            block
+            color="success"
+          >
+            参加
+          </v-btn>
+        </v-flex>
+        <v-flex xs12>
+          <v-btn
+            block
+            color="success"
+          >
+            開催
+          </v-btn>
+        </v-flex>
+        <v-flex xs12>
+          <v-btn
+            block
+            color="success"
+          >
+            編集
+          </v-btn>
+        </v-flex>
+        <v-flex xs12>
+          <v-btn
+            block
+            color="success"
+            @click="shareOnTwitte"
+          >
+            シェア
+          </v-btn>
+        </v-flex>
       </v-layout>
     </v-container>
-    <v-flex xs12 sm6 md3>  
-    </v-flex>
   </v-form>
 </template>
 
 <script>
-import EventStore from '../models/EventStore.js'
-export default {
-  data() {
-    return {
-      text: "",
-      chip3: true,
-      select: ["add-tags-with", "enter", "tab", "paste"],
-      items: [],
-      search: "" //sync search
-    };
-  },
-  methods: {
-    updateTags() {
-      this.$nextTick(() => {
-        this.select.push(...this.search.split(","));
-        this.$nextTick(() => {
-          this.search = "";
-        });
-      });
-    },
-    shareOnTwitter() {
-      window.open('https://twitter.com/intent/tweet?text=テスト&hashtags=z&url=https://atsumeru.me/' + this.$route.query.eventId)
-    },
-    getEvent() {
-      try {
-        this.$data.sharedState.dispatch('getEvent')
-      } catch (e) {
-        alert(e.message)
+  import EventStore from '../models/EventStore.js'
+  export default {
+    data () {
+      return {
+        text: '',
+        chip3: true,
+        select: ['add-tags-with', 'enter', 'tab', 'paste'],
+        items: [],
+        search: ''
       }
     },
-  },
-  mounted(){
-    console.log(this.$route.query.eventId);
-    EventStore.dispatch('getEvent', this.$route.query.eventId);
+    mounted () {
+      console.log(this.$route.query.eventId)
+      EventStore.dispatch('getEvent', this.$route.query.eventId)
+    },
+    methods: {
+      updateTags () {
+        this.$nextTick(() => {
+          this.select.push(...this.search.split(','))
+          this.$nextTick(() => {
+            this.search = ''
+          })
+        })
+      },
+      shareOnTwitter () {
+        window.open(
+          'https://twitter.com/intent/tweet?text=テスト&hashtags=z&url=https://atsumeru.me/' +
+            this.$route.query.eventId
+        )
+      }
+    }
   }
-};
 </script>
 
 <style>
@@ -108,8 +138,8 @@ export default {
 }
 
 .tag-input span.v-chip::before {
-  content: "label";
-  font-family: "Material Icons";
+  content: 'label';
+  font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 20px;
@@ -120,7 +150,7 @@ export default {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: "liga";
+  -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
 </style>
