@@ -6,6 +6,7 @@
         wrap
       >
         <v-flex
+          class="headline"
           xs12
           sm6
           md3
@@ -13,11 +14,13 @@
           <v-text-field
             label="テーマ"
             :value="event.theme"
+            placeholder="loading..."
             readonly
           />
         </v-flex>
 
         <v-flex
+          class="headline"
           xs12
           sm6
           md3
@@ -25,6 +28,7 @@
           <v-text-field
             label="場所"
             :value="event.address"
+            placeholder="loading..."
             readonly
           />
         </v-flex>
@@ -33,8 +37,6 @@
           <v-chip
             v-for="tag in event.tags"
             :key="tag"
-            color="success"
-            text-color="white"
           >
             <v-icon left>
               label
@@ -48,7 +50,7 @@
             block
             color="success"
           >
-            参加
+            あつまる
           </v-btn>
         </v-flex>
         <v-flex xs12>
@@ -56,7 +58,7 @@
             block
             color="success"
           >
-            開催
+            手をあげる
           </v-btn>
         </v-flex>
         <v-flex xs12>
@@ -111,8 +113,8 @@
       shareOnTwitter () {
         window.open(
           'https://twitter.com/intent/tweet' +
-            '?text=' + encodeURIComponent(EventStore.getters.event.address + 'で「' + EventStore.getters.event.theme + '」な人が集まってるよ！\n\n') +
-            '&hashtags=' + EventStore.getters.event.tags.join(',') +
+            '?text=' + encodeURIComponent('"' + EventStore.getters.event.theme + '"呼びかけを応援します！ | ') +
+            '&hashtags=' + EventStore.getters.event.address + ',' + EventStore.getters.event.tags.join(',') + ',atsumaru' +
             '&url=' + location.origin + '/view?eventId=' + this.$route.query.eventId
         )
       }
@@ -128,33 +130,16 @@
   border: 1px dashed rgba(0, 0, 0, 0.4);
 }
 
-.tag-input span.chip {
-  background-color: #1976d2;
-  color: #fff;
+span.chip {
+  background-color: #1976d2 !important;
+  color: #fff !important;
   font-size: 1em;
 }
 
-.tag-input span.v-chip {
-  background-color: #1976d2;
-  color: #fff;
+span.v-chip {
+  background-color: #1976d2 !important;
+  color: #fff !important;
   font-size: 1em;
   padding-left: 7px;
-}
-
-.tag-input span.v-chip::before {
-  content: 'label';
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
 }
 </style>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Create from './components/CreateEvent.vue'
+import Home from './components/Home.vue'
 
 Vue.use(Router)
 
@@ -10,8 +10,13 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/create',
       name: 'create',
-      component: Create
+      component: () => import('./components/CreateEvent.vue')
     },
     {
       path: '/view',

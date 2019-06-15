@@ -37,4 +37,17 @@
   height: 30px;
   margin-left: 10px;
 }
+.v-label {
+  font-size: 1.3em !important;
+}
+input[type="text"] {
+  margin-top: 10px !important;
+  font-size: 1.3em !important;
+}
+.v-select__selections {
+  margin-top: 10px !important;
+}
+.v-btn__content {
+  font-size: 1.4em !important;
+}
 </style>

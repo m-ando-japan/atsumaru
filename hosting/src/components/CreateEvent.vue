@@ -10,7 +10,10 @@
           sm6
           md3
         >
-          <v-text-field label="テーマ" />
+          <v-text-field
+            label="テーマ"
+            placeholder="____で____する"
+          />
         </v-flex>
         <v-flex
           xs12
@@ -19,7 +22,7 @@
         >
           <v-text-field
             label="場所"
-            placeholder="〇〇県〇〇市"
+            placeholder="____県____市"
           />
         </v-flex>
         <v-flex xs12>
@@ -42,7 +45,7 @@
             color="success"
             @click="createEvent"
           >
-            投稿
+            呼びかける
           </v-btn>
         </v-flex>
       </v-layout>
