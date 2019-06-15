@@ -59,6 +59,15 @@
             {{ tag }}
           </v-chip>
         </v-flex>
+        <v-flex
+          xs12
+          class="favorites"
+        >
+          <v-icon color="pink">
+            favorite
+          </v-icon>
+          <span>99</span>
+        </v-flex>
         <v-flex xs12>
           <v-btn
             block
@@ -166,6 +175,17 @@ span.v-chip {
   padding-left: 7px;
 }
 
+.favorites {
+    text-align: center;
+}
+.favorites i {
+  font-size: 50px !important;
+}
+.favorites span {
+  color: rgba(0,0,0,0.54);
+  font-size: 60px !important;
+}
+
 .sns {
   position: fixed;
   width: 100%;
@@ -178,7 +198,6 @@ span.v-chip {
   left: calc((100vw - 104px) / 2);
   bottom: 10px;
 }
-
 .sns .twitter {
   background-color: #1b95e0 !important;
 }
