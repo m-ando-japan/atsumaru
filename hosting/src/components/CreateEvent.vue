@@ -28,12 +28,12 @@
         <v-flex xs12>
           <v-combobox
             v-model="select"
-            multiple
+            class="tag-input"
             label="Tags"
             append-icon
             chips
             deletable-chips
-            class="tag-input"
+            multiple
             :search-input.sync="search"
             @keyup.tab="updateTags"
             @paste="updateTags"
@@ -42,6 +42,7 @@
         <v-flex xs12>
           <v-btn
             block
+            large
             color="success"
             @click="createEvent"
           >
@@ -89,13 +90,13 @@
 }
 
 .tag-input span.chip {
-    background-color: #1976d2;
+    background-color: #2196f3;
     color: #fff;
     font-size: 1em;
 }
 
 .tag-input span.v-chip {
-    background-color: #1976d2;
+    background-color: #2196f3;
     color: #fff;
     font-size: 1em;
     padding-left: 7px;

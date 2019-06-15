@@ -8,8 +8,8 @@
         <v-flex
           class="headline"
           xs12
-          sm6
-          md3
+          sm12
+          md12
         >
           <v-text-field
             label="テーマ"
@@ -18,12 +18,11 @@
             readonly
           />
         </v-flex>
-
         <v-flex
           class="headline"
-          xs12
+          xs8
           sm6
-          md3
+          md6
         >
           <v-text-field
             label="場所"
@@ -32,7 +31,23 @@
             readonly
           />
         </v-flex>
-
+        <v-flex
+          xs4
+          sm6
+          md6
+          edit-event
+        >
+          <v-btn
+            fab
+            large
+            color="blue-grey"
+            @click="editEvent"
+          >
+            <v-icon>
+              edit
+            </v-icon>
+          </v-btn>
+        </v-flex>
         <v-flex xs12>
           <v-chip
             v-for="tag in event.tags"
@@ -44,10 +59,10 @@
             {{ tag }}
           </v-chip>
         </v-flex>
-
         <v-flex xs12>
           <v-btn
             block
+            large
             color="success"
           >
             あつまる
@@ -56,26 +71,28 @@
         <v-flex xs12>
           <v-btn
             block
+            large
             color="success"
           >
             手をあげる
           </v-btn>
         </v-flex>
-        <v-flex xs12>
+      </v-layout>
+    </v-container>
+    <v-container class="sns">
+      <v-layout
+        row
+      >
+        <v-flex
+          xs12
+        >
           <v-btn
-            block
-            color="success"
-          >
-            編集
-          </v-btn>
-        </v-flex>
-        <v-flex xs12>
-          <v-btn
-            block
-            color="success"
+            fab
+            large
+            class="twitter"
             @click="shareOnTwitter"
           >
-            シェア
+            <v-icon>fab fa-twitter</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
@@ -102,6 +119,9 @@
       EventStore.dispatch('getEvent', this.$route.query.eventId)
     },
     methods: {
+      editEvent () {
+        this.$router.push('/create')
+      },
       updateTags () {
         this.$nextTick(() => {
           this.select.push(...this.search.split(','))
@@ -123,6 +143,9 @@
 </script>
 
 <style>
+.edit-event {
+  text-align: right;
+}
 #input-usage .v-input__prepend-outer,
 #input-usage .v-input__append-outer,
 #input-usage .v-input__slot,
@@ -131,15 +154,32 @@
 }
 
 span.chip {
-  background-color: #1976d2 !important;
+  background-color: #2196f3 !important;
   color: #fff !important;
   font-size: 1em;
 }
 
 span.v-chip {
-  background-color: #1976d2 !important;
+  background-color: #2196f3 !important;
   color: #fff !important;
   font-size: 1em;
   padding-left: 7px;
+}
+
+.sns {
+  position: fixed;
+  width: 100%;
+  max-width: 100%;
+  bottom: 0;
+  text-align: center;
+}
+.sns .layout.row {
+  position: absolute;
+  left: calc((100vw - 104px) / 2);
+  bottom: 10px;
+}
+
+.sns .twitter {
+  background-color: #1b95e0 !important;
 }
 </style>

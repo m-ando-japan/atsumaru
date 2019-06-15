@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-free/css/all.css'
 import './plugins/vuetify'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
@@ -5,9 +6,11 @@ import Vuetify from 'vuetify'
 import App from './App.vue'
 import router from './router'
 
-Vue.config.productionTip = false
+Vue.use(Vuetify, {
+  iconfont: 'fa'
+ })
 
-Vue.use(Vuetify)
+Vue.config.productionTip = false
 
 new Vue({
   router,

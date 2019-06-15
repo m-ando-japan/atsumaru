@@ -26,6 +26,7 @@
         <v-flex xs12>
           <v-btn
             block
+            large
             color="success"
             @click="start"
           >

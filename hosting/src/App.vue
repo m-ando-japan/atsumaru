@@ -49,5 +49,6 @@ input[type="text"] {
 }
 .v-btn__content {
   font-size: 1.4em !important;
+  color: #fff !important;
 }
 </style>
