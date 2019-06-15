@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import EventStore from '../models/EventStore.js'
 export default {
   data() {
     return {
@@ -59,8 +60,6 @@ export default {
     };
   },
   methods: {
-    appendIconCallback() {},
-    prependIconCallback() {},
     updateTags() {
       this.$nextTick(() => {
         this.select.push(...this.search.split(","));
@@ -68,9 +67,18 @@ export default {
           this.search = "";
         });
       });
+    },
+    getEvent() {
+      try {
+        this.$data.sharedState.dispatch('getEvent')
+      } catch (e) {
+        alert(e.message)
+      }
     }
   }
 };
+//  ユーザー情報取得
+EventStore.dispatch('getEvent');
 </script>
 
 
