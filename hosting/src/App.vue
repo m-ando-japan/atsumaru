@@ -14,23 +14,7 @@
     </v-toolbar>
 
     <v-content>
-      <CreateEvent/>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
-
-<script>
-import CreateEvent from './components/CreateEvent'
-
-export default {
-  name: 'App',
-  components: {
-    CreateEvent
-  },
-  data () {
-    return {
-      //
-    }
-  }
-}
-</script>
