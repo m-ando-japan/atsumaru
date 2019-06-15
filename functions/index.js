@@ -6,14 +6,16 @@ admin.initializeApp();
 
 const Event = require('./event');
 const Member = require('./member')
-const TestApi = require('./testApi');
+const History = require('./history');
 
 exports.event = functions.https.onRequest((request, response) => {
   new Event(admin).onRequest(request, response);
 });
+
 exports.member = functions.https.onRequest((request, response) => {
   new Member(admin).onRequest(request, response);
 });
-exports.testApi = functions.https.onRequest((request, response) => {
-  new TestApi(admin).onRequest(request, response);
+
+exports.history = functions.https.onRequest((request, response) => {
+  new History(admin).onRequest(request, response);
 });

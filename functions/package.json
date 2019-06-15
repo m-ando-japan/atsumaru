@@ -7,7 +7,7 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "test": "curl -X POST -d 'text=aaaa' -v https://us-central1-atsumaru-803b0.cloudfunctions.net/addMessage?text=123",
+    "test": "curl -X POST -d -v https://us-central1-atsumaru-803b0.cloudfunctions.net/addMessage?text=123",
     "logs": "firebase functions:log"
   },
   "engines": {
@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "firebase-admin": "~7.0.0",
-    "firebase-functions": "^2.3.0"
+    "firebase-functions": "^2.3.0",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
