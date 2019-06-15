@@ -1,4 +1,4 @@
-module.exports = class Event {
+module.exports = class Member {
   constructor(admin) {
     this.admin = admin;
   }
