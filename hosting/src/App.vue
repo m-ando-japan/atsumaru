@@ -7,12 +7,6 @@
           @click="backToHome"
         >atsumaru</span>
       </v-toolbar-title>
-      <v-spacer />
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      />
     </v-toolbar>
     <v-content>
       <router-view />
