@@ -110,8 +110,10 @@
       },
       shareOnTwitter () {
         window.open(
-          'https://twitter.com/intent/tweet?text=テスト&hashtags=z&url=' +
-            location.origin + '/view?eventId=' + this.$route.query.eventId
+          'https://twitter.com/intent/tweet' +
+            '?text=' + encodeURIComponent(EventStore.getters.event.address + 'で「' + EventStore.getters.event.theme + '」な人が集まってるよ！\n\n') +
+            '&hashtags=' + EventStore.getters.event.tags.join(',') +
+            '&url=' + location.origin + '/view?eventId=' + this.$route.query.eventId
         )
       }
     }
