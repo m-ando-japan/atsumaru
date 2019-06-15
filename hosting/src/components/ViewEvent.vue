@@ -71,7 +71,7 @@
           <v-btn
             block
             color="success"
-            @click="shareOnTwitte"
+            @click="shareOnTwitter"
           >
             シェア
           </v-btn>
