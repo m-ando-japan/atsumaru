@@ -1,6 +1,5 @@
 <template>
   <v-form>
-    <test />
     <v-container>
       <v-layout
         row
@@ -52,11 +51,7 @@
 </template>
 
 <script>
-  import Test from './Test.vue'
   export default {
-    components: {
-      Test
-    },
     data () {
       return {
         text: '',
@@ -69,7 +64,6 @@
     methods: {
       createEvent () {
         this.$router.push('/view?eventId=JdObKeA6YdF7jSAcp96K')
-        // this.$router.push('/view?eventId=TEST-DESU')
       },
       updateTags () {
         this.$nextTick(() => {
