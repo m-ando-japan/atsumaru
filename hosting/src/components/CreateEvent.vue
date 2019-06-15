@@ -26,12 +26,10 @@
         </v-flex>
 
         <v-flex xs12>    
-          <v-btn block color="success" to="/View">投稿</v-btn>  
+          <v-btn @click="createEvent" block color="success">投稿</v-btn>        
         </v-flex>
       </v-layout>
     </v-container>
-    <v-flex xs12 sm6 md3>  
-    </v-flex>
   </v-form>
 </template>
 
@@ -47,8 +45,9 @@ export default {
     };
   },
   methods: {
-    appendIconCallback() {},
-    prependIconCallback() {},
+    createEvent() {
+      this.$router.push('/view');
+    },
     updateTags() {
       this.$nextTick(() => {
         this.select.push(...this.search.split(","));
