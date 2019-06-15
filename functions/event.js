@@ -7,16 +7,24 @@ module.exports = class Event {
     return this.admin.firestore().collection('events').doc(eventId).get();
   }
 
-  getTags(eventId) {
-    return this.admin.firestore().collection('events').doc(eventId).collection('tag').get().then(querySnapshot => {
-      const tags = [];
-      querySnapshot.forEach(doc => {
-        const tag = doc.data();
-        tags.push({name: tag.name, id: doc.id});
-      });
-      return tags;
+  addEvent(theme, address, tags) {
+    return this.admin.firestore().collection('events').add({
+      "theme": theme,
+      "address": address,
+      "tags": tags
     });
   }
+
+  // upsertTag(tagName, eventId) {
+  //   return this.admin.firestore().collection('tags').doc(tagName).get().then(doc => {
+  //     if (!doc.exist) {
+  //       return this.admin.firestore().collection('tags').doc(tagName).set({eventIds: [eventId]});
+  //     }
+  //     return doc;
+  //   }).then(doc => {
+  //     return doc.collection('eventIds').add(eventId);
+  //   });
+  // }
   
   onRequest(request, response) {
     // イベント情報を取得する
@@ -24,24 +32,28 @@ module.exports = class Event {
       // request.quest.eventId = hoge 
       // ex.) event?eventIId=hoge
 
-      Promise.all([
-        this.getEvent(request.query.eventId),
-        this.getTags(request.query.eventId)
-      ]).then(results => {
-        const event = results[0];
-        const tags = results[1];
-        if (!event.exists) {
+      this.getEvent(request.query.eventId).then(doc => {
+        if (!doc.exists) {
           return response.sendStatus(404);
         }
-        const responseObject = Object.assign(
-          {},
-          event.data(),
-          {tags: tags}
-        );
-        return response.status(200).json(responseObject);
+        return response.status(200).json(doc.data());
       }).catch(e => {
         console.log('Error', e);
         response.sendStatus(500);
+      });
+    }else if( request.method === "POST") {
+      const theme = request.body.theme;
+      const address = request.body.address;
+      const tags = request.body.tags;
+      // TODO タグから逆引きできるようにしておく
+      // return Promise.all(tags.map(tag => this.upsertTag(tag, doc.id)));
+      this.addEvent(theme, address, tags).then((doc) => {
+        // 保存に成功した際の処理
+        return response.status(200).json({id: doc.id});
+      }).catch((e) => {
+        // 保存に失敗した際の処理
+        console.log('Error', e);
+        return response.sendStatus(403);
       });
     }
   }
