@@ -1,5 +1,6 @@
 <template>
   <v-form>
+    <Test></Test>
     <v-container>
       <v-layout row wrap>
         <v-flex xs12 sm6 md3>
@@ -34,7 +35,11 @@
 </template>
 
 <script>
+import Test from './Test.vue'
 export default {
+  component: {
+      'Test': Test
+  },
   data() {
     return {
       text: "",
@@ -46,8 +51,8 @@ export default {
   },
   methods: {
     createEvent() {
-      // this.$router.push('/view?eventId=dNaMbP81n1fGG1X6ij');
-      this.$router.push('/view?eventId=TEST-DESU');
+       this.$router.push('/view?eventId=JdObKeA6YdF7jSAcp96K');
+      //this.$router.push('/view?eventId=TEST-DESU');
     },
     updateTags() {
       this.$nextTick(() => {
