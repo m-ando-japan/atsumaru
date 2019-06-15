@@ -7,8 +7,8 @@
       >
         <v-flex
           xs12
-          sm6
-          md3
+          sm12
+          md12
         >
           <v-text-field
             label="テーマ"
@@ -16,9 +16,9 @@
           />
         </v-flex>
         <v-flex
-          xs12
+          xs8
           sm6
-          md3
+          md6
         >
           <v-text-field
             label="場所"
