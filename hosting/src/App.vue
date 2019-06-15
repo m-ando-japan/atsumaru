@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline">
-        <span>atsumaru</span>
+        <span class="home-action" v-on:click="backToHome">atsumaru</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -18,3 +18,19 @@
     </v-content>
   </v-app>
 </template>
+
+<script>
+export default {
+  methods: {
+    backToHome () {
+      this.$router.push('/');
+    }
+  }
+};
+</script>
+
+<style>
+.headline .home-action:hover {
+  cursor: pointer;
+}
+</style>
