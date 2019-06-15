@@ -14,18 +14,18 @@
     </v-toolbar>
 
     <v-content>
-      <CreateEvent/>
+      <ViewEvent/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import CreateEvent from './components/CreateEvent'
+import ViewEvent from './components/ViewEvent'
 
 export default {
   name: 'App',
   components: {
-    CreateEvent
+    ViewEvent
   },
   data () {
     return {

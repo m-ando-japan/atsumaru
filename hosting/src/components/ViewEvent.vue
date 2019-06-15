@@ -3,29 +3,42 @@
     <v-container>
       <v-layout row wrap>
         <v-flex xs12 sm6 md3>
-          <v-text-field label="テーマ"></v-text-field>
+          <v-text-field 
+            label="テーマ"
+            value="test"
+            readonly>
+          </v-text-field>
         </v-flex>
 
         <v-flex xs12 sm6 md3>
-          <v-text-field label="場所" placeholder="〇〇県〇〇市"></v-text-field>
+          <v-text-field 
+            label="場所" 
+            value="test"
+            readonly>
+          </v-text-field>
+        </v-flex>
+        
+        <v-flex xs12>
+          <v-chip v-for="tag in select"
+                      :key="tag"
+                      color="success" 
+                      text-color="white">
+            <v-icon left>label</v-icon>{{tag}}
+          </v-chip>  
         </v-flex>
 
         <v-flex xs12>
-          <v-combobox
-            multiple
-            v-model="select"
-            label="Tags"
-            append-icon
-            chips
-            deletable-chips
-            class="tag-input"
-            :search-input.sync="search"
-            @keyup.tab="updateTags"
-            @paste="updateTags"
-          ></v-combobox>
+          <v-btn block color="success">参加</v-btn>  
         </v-flex>
-
-        <v-btn block color="success">投稿</v-btn>      
+        <v-flex xs12>    
+          <v-btn block color="success">開催</v-btn> 
+        </v-flex>     
+        <v-flex xs12>
+          <v-btn block color="success">編集</v-btn>  
+        </v-flex>   
+        <v-flex xs12> 
+          <v-btn block color="success">シェア</v-btn> 
+        </v-flex>     
         
       </v-layout>
     </v-container>
