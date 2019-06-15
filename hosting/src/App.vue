@@ -7,6 +7,10 @@
           @click="backToHome"
         >atsumaru</span>
       </v-toolbar-title>
+      <img
+        class="header-logo"
+        src="/logo.png"
+      >
     </v-toolbar>
     <v-content>
       <router-view />
@@ -26,6 +30,11 @@
 
 <style>
 .headline .home-action:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+.header-logo {
+  position: relative;
+  height: 30px;
+  margin-left: 10px;
 }
 </style>
