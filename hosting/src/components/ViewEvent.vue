@@ -108,8 +108,8 @@
       },
       shareOnTwitter () {
         window.open(
-          'https://twitter.com/intent/tweet?text=テスト&hashtags=z&url=https://atsumeru.me/' +
-            this.$route.query.eventId
+          'https://twitter.com/intent/tweet?text=テスト&hashtags=z&url=' +
+            location.origin + '/view?eventId=' + this.$route.query.eventId
         )
       }
     }
