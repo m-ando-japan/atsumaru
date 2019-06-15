@@ -31,7 +31,7 @@
 
         <v-flex xs12>
           <v-chip
-            v-for="tag in select"
+            v-for="tag in event.tags"
             :key="tag"
             color="success"
             text-color="white"
@@ -87,8 +87,6 @@
     data () {
       return {
         text: '',
-        chip3: true,
-        select: ['add-tags-with', 'enter', 'tab', 'paste'],
         items: [],
         search: ''
       }
