@@ -37,7 +37,7 @@
           <v-btn block color="success">編集</v-btn>  
         </v-flex>   
         <v-flex xs12> 
-          <v-btn block color="success">シェア</v-btn> 
+          <v-btn @click="shareOnTwitter" block color="success">シェア</v-btn> 
         </v-flex>     
         
       </v-layout>
@@ -68,19 +68,23 @@ export default {
         });
       });
     },
+    shareOnTwitter() {
+      window.open('https://twitter.com/intent/tweet?text=テスト&hashtags=z&url=https://atsumeru.me/' + this.$route.query.eventId)
+    },
     getEvent() {
       try {
         this.$data.sharedState.dispatch('getEvent')
       } catch (e) {
         alert(e.message)
       }
-    }
+    },
+  },
+  mounted(){
+    console.log(this.$route.query.eventId);
+    EventStore.dispatch('getEvent', this.$route.query.eventId);
   }
 };
-//  ユーザー情報取得
-EventStore.dispatch('getEvent');
 </script>
-
 
 <style>
 #input-usage .v-input__prepend-outer,

@@ -46,7 +46,8 @@ export default {
   },
   methods: {
     createEvent() {
-      this.$router.push('/view');
+      // this.$router.push('/view?eventId=dNaMbP81n1fGG1X6ij');
+      this.$router.push('/view?eventId=TEST-DESU');
     },
     updateTags() {
       this.$nextTick(() => {
