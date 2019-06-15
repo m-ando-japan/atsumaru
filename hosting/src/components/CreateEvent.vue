@@ -25,8 +25,9 @@
           ></v-combobox>
         </v-flex>
 
-        <v-btn block color="success">投稿</v-btn>      
-        
+        <v-flex xs12>    
+          <v-btn block color="success" to="/View">投稿</v-btn>  
+        </v-flex>
       </v-layout>
     </v-container>
     <v-flex xs12 sm6 md3>  

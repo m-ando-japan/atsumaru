@@ -14,23 +14,7 @@
     </v-toolbar>
 
     <v-content>
-      <ViewEvent/>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
-
-<script>
-import ViewEvent from './components/ViewEvent'
-
-export default {
-  name: 'App',
-  components: {
-    ViewEvent
-  },
-  data () {
-    return {
-      //
-    }
-  }
-}
-</script>
