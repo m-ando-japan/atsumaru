@@ -27,6 +27,9 @@ module.exports = class Event {
   // }
   
   onRequest(request, response) {
+    response.set('Access-Control-Allow-Origin', '*');
+    response.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS, POST');
+    response.set('Access-Control-Allow-Headers', 'Content-Type');
     // イベント情報を取得する
     if (request.method === 'GET') {
       // request.quest.eventId = hoge 
@@ -41,7 +44,7 @@ module.exports = class Event {
         console.log('Error', e);
         response.sendStatus(500);
       });
-    }else if( request.method === "POST") {
+    }else if (request.method === "POST") {
       const theme = request.body.theme;
       const address = request.body.address;
       const tags = request.body.tags;
