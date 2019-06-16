@@ -37,6 +37,7 @@
               chips
               deletable-chips
               multiple
+              item-text
               :search-input.sync="search"
               @keyup.tab="updateTags"
               @paste="updateTags"
@@ -70,16 +71,19 @@
         items: [],
         theme: "",
         address: "",
-        search: '' // sync search
+        search: '', // sync search
+        eventId: ""
       }
     },
     methods: {
       createEvent () {
         console.log('theme:' + this.$data.theme);
         console.log('address:' + this.$data.address);
-        console.log('tags:' + this.$data.items);
-        //EventStore.dispatch('createEvent', this.Theme,this,Address,this.Tags)
-        //EventStore.dispatch('createEvent', this.$data.theme,this.$data.address,'tag1')
+        console.log('tags:' + this.$data.select);
+        EventStore.dispatch('createEvent', this.$data.theme,this.$data.address,this.$data.select)
+
+        console.log('eventId:' + EventStore.getters.eventId);
+        this.$router.push('/view?' + EventStore.getters.eventId);
       },
       updateTags () {
         this.$nextTick(() => {

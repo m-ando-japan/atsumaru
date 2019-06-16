@@ -5,7 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 //  データストア
-var MemberStore = new Vuex.Store({
+var HistoryStore = new Vuex.Store({
     mutations: {
       postMember (state, response) {
         console.log(response)
@@ -13,15 +13,13 @@ var MemberStore = new Vuex.Store({
     },
     actions: {
       postMember ({ commit }, params) {
-        console.log(params)
-        axios.post('https://us-central1-dev-atsumaru.cloudfunctions.net/member', params)
+        axios.post('https://us-central1-dev-atsumaru.cloudfunctions.net/history', params)
           .then(response => {
             if (response.status === 200) {
-              console.log(response)
-              commit('postMember', response)
+              commit('postHistory', response)
             }
           })
       }
     }
   })
-  export default MemberStore
+  export default HistoryStore

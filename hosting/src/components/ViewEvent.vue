@@ -96,7 +96,7 @@
             </v-card-text>
 
             <v-card-text>
-              登録されたメールアドレスは通知用以外に使用されることがありません。
+              登録されたメールアドレスは通知用以外に使用されることはありません。
             </v-card-text>
 
             <v-card-text>
@@ -188,9 +188,6 @@
             this.search = ''
           })
         })
-      },
-      raiseHand () {
-        this.$router.push('/raise')
       },
       shareOnTwitter () {
         window.open(
