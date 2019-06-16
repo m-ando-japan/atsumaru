@@ -198,6 +198,14 @@ span.v-chip {
   left: calc((100vw - 104px) / 2);
   bottom: 10px;
 }
+@media screen and (max-height: 700px) {
+  .sns {
+    position: relative;
+  }
+  .sns .layout.row {
+    top: 0;
+  }
+}
 .sns .twitter {
   background-color: #1b95e0 !important;
 }

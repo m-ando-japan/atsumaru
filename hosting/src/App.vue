@@ -9,7 +9,7 @@
       </v-toolbar-title>
       <img
         class="header-logo"
-        src="/logo.png"
+        src="/logo.svg"
       >
     </v-toolbar>
     <v-content>
