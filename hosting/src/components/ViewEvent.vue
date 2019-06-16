@@ -254,6 +254,7 @@
           email: this.$data.email
         }).then(() => {
           this.$data.join = false
+          EventStore.dispatch('getEvent', this.$data.eventId)
         })
       },
       submitToOpen () {
