@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "atsumaru-803b0"
+    "default": "atsumaru-803b0",
+    "develop": "dev-atsumaru"
   }
 }
