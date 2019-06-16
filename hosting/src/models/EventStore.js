@@ -21,7 +21,7 @@ var EventStore = new Vuex.Store({
     },
     actions: {
         getEvent ({ commit }, eventId) {
-        axios.get('https://us-central1-atsumaru-803b0.cloudfunctions.net/event?eventId=' + eventId)
+        axios.get('https://us-central1-dev-atsumaru.cloudfunctions.net/event?eventId=' + eventId)
           .then(response => {
             if (response.status === 200) {
               commit('getEvent', response)

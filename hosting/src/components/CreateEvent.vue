@@ -67,7 +67,7 @@
     },
     methods: {
       createEvent () {
-        this.$router.push('/view?eventId=JdObKeA6YdF7jSAcp96K')
+        this.$router.push('/view?eventId=E7rRMnobT9ZwiwjHTJmF')
       },
       updateTags () {
         this.$nextTick(() => {
