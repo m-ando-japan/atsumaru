@@ -47,5 +47,7 @@ module.exports = class History {
           return response.sendStatus(403)
         })
     }
+
+    return response.sendStatus(500);
   }
 }
