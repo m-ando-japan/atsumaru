@@ -14,8 +14,7 @@
             <v-text-field
               label="テーマ"
               placeholder="____で____する"
-              :value="Theme"
-              @input="doUpdate"
+              v-model="theme"
             />
           </v-flex>
           <v-flex
@@ -26,8 +25,7 @@
             <v-text-field
               label="場所"
               placeholder="____県____市"
-              :value="Address"
-              @input="doUpdate"
+              v-model="address"
             />
           </v-flex>
           <v-flex xs12>
@@ -61,8 +59,6 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-
   import EventStore from '../models/EventStore.js'
   
   export default {
@@ -72,22 +68,18 @@
         chip3: true,
         select: [],
         items: [],
+        theme: "",
+        address: "",
         search: '' // sync search
       }
     },
-    name: 'inputFileld',
-    computed: {
-      message () { return this.$store.getters.message },
-      ...mapGetters('Theme', ['theme']),
-      ...mapGetters('Address', ['address']),
-      ...mapGetters('Tags', ['tags']),
-    },
     methods: {
       createEvent () {
-        //console.log(this.$store.getters.message);
+        console.log('theme:' + this.$data.theme);
+        console.log('address:' + this.$data.address);
+        console.log('tags:' + this.$data.items);
         //EventStore.dispatch('createEvent', this.Theme,this,Address,this.Tags)
-        EventStore.dispatch('createEvent', 'themeTest','広島県広島市','tag1')
-        //this.$router.push('/view?eventId=JdObKeA6YdF7jSAcp96K')
+        //EventStore.dispatch('createEvent', this.$data.theme,this.$data.address,'tag1')
       },
       updateTags () {
         this.$nextTick(() => {
@@ -96,9 +88,6 @@
             this.search = ''
           })
         })
-      },
-      doUpdate (event) {
-        this.$store.dispatch('doUpdate', event.target.value)
       },
     }
   }
