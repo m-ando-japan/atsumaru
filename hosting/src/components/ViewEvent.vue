@@ -73,10 +73,54 @@
             block
             large
             color="success"
+            @click.stop="dialog = true"
           >
             あつまる
           </v-btn>
         </v-flex>
+        <v-dialog
+          v-model="dialog"
+          type="boolean"
+          width="500"
+        >
+          <v-card>
+            <v-card-title
+              class="headline grey lighten-2"
+              primary-title
+            >
+              通知先の設定
+            </v-card-title>
+
+            <v-card-text>
+              メールアドレスを登録してください。
+            </v-card-text>
+
+            <v-card-text>
+              登録されたメールアドレスは通知用以外に使用されることがありません。
+            </v-card-text>
+
+            <v-card-text>
+              <v-text-field
+                v-model="email"
+                label="メールアドレス"
+                placeholder="user@atsumaru.example"
+              />
+            </v-card-text>
+
+            <v-divider />
+
+            <v-card-actions class="dialog-footer">
+              <v-spacer />
+              <v-btn
+                color="primary"
+                @click="submitToJoin"
+              >
+                登録する
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
         <v-flex xs12>
           <v-btn
             block
@@ -112,12 +156,16 @@
 
 <script>
   import EventStore from '../models/EventStore.js'
+  import MemberStore from '../models/MemberStore.js'
   export default {
     data () {
       return {
+        dialog: false,
+        email: '',
         text: '',
         items: [],
-        search: ''
+        search: '',
+        eventId: ''
       }
     },
     computed: {
@@ -126,7 +174,8 @@
       }
     },
     mounted () {
-      EventStore.dispatch('getEvent', this.$route.query.eventId)
+      this.$data.eventId = this.$route.query.eventId
+      EventStore.dispatch('getEvent', this.$data.eventId)
     },
     methods: {
       editEvent () {
@@ -148,8 +197,14 @@
           'https://twitter.com/intent/tweet' +
             '?text=' + encodeURIComponent('"' + EventStore.getters.event.theme + '"呼びかけを応援します！ | ') +
             '&hashtags=' + EventStore.getters.event.address + ',' + EventStore.getters.event.tags.join(',') + ',atsumaru' +
-            '&url=' + location.origin + '/view?eventId=' + this.$route.query.eventId
+            '&url=' + location.origin + '/view?eventId=' + this.$data.eventId
         )
+      },
+      submitToJoin () {
+        MemberStore.dispatch('postMember', {
+          eventId: this.$data.eventId,
+          email: this.$data.email
+        })
       }
     }
   }
@@ -202,7 +257,18 @@ span.v-chip {
   left: calc((100vw - 104px) / 2);
   bottom: 10px;
 }
+@media screen and (max-height: 700px) {
+  .sns {
+    position: relative;
+  }
+  .sns .layout.row {
+    top: 0;
+  }
+}
 .sns .twitter {
   background-color: #1b95e0 !important;
+}
+.dialog-footer {
+  padding: 20px 15px !important;
 }
 </style>

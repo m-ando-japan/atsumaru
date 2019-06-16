@@ -4,7 +4,31 @@ module.exports = class Event {
   }
 
   getEvent(eventId) {
-    return this.admin.firestore().collection('events').doc(eventId).get();
+    return this.admin.firestore().collection('events').doc(eventId).get().then(snapShot => {
+      if (!snapShot.exists) return {};
+      const event = snapShot.data();
+      return {
+        theme: event.theme || '',
+        address: event.address || '',
+        tags: event.tags || [],
+        memberCount: event.members ? event.members.length : 0
+      };
+    });
+  }
+
+  getHistory(eventId) {
+    return this.admin.firestore().collection('events').doc(eventId).collection('history').get().then(snapShot => {
+      if (!snapShot.exists) return [];
+      const history = [];
+      snapShot.forEach(historyItem => {
+        history.push({
+          date: historyItem.date,
+          twitterId: historyItem.twitterId || '',
+          message: historyItem.message || ''
+        });
+      });
+      return history;
+    });
   }
 
   addEvent(theme, address, tags) {
@@ -35,11 +59,16 @@ module.exports = class Event {
       // request.quest.eventId = hoge 
       // ex.) event?eventIId=hoge
 
-      this.getEvent(request.query.eventId).then(doc => {
-        if (!doc.exists) {
+      Promise.all([
+          this.getEvent(request.query.eventId),
+          this.getHistory(request.query.eventId),
+      ]).then(results => {
+        const event = results[0];
+        const history = results[1];
+        if (JSON.stringify(event) === '{}') {
           return response.sendStatus(404);
         }
-        return response.status(200).json(doc.data());
+        return response.status(200).json(Object.assign({}, event, {history: history}));
       }).catch(e => {
         console.log('Error', e);
         response.sendStatus(500);

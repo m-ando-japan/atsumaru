@@ -18,7 +18,7 @@
             手をあげよう！
           </p>
           <img
-            src="/logo.png"
+            src="/logo.svg"
             alt="logo"
           >
           <h2>atsumaru</h2>
