@@ -20,6 +20,8 @@ module.exports = class TestApi {
         console.log('Error', e);
         return response.sendStatus(403);
       });
+
+      return response.sendStatus(500);
     }
   };
   

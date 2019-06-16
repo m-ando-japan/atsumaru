@@ -66,20 +66,20 @@
           <v-icon color="pink">
             favorite
           </v-icon>
-          <span>99</span>
+          <span>{{ (event.messages) ? event.messages.length : '0' }}</span>
         </v-flex>
         <v-flex xs12>
           <v-btn
             block
             large
             color="success"
-            @click.stop="dialog = true"
+            @click.stop="join = true"
           >
             あつまる
           </v-btn>
         </v-flex>
         <v-dialog
-          v-model="dialog"
+          v-model="join"
           type="boolean"
           width="500"
         >
@@ -126,11 +126,59 @@
             block
             large
             color="success"
-            @click="raiseHand"
+            @click="open = true"
           >
             手をあげる
           </v-btn>
         </v-flex>
+
+        <v-dialog
+          v-model="open"
+          type="boolean"
+          width="500"
+        >
+          <v-card>
+            <v-card-title
+              class="headline grey lighten-2"
+              primary-title
+            >
+              主催者の情報
+            </v-card-title>
+
+            <v-card-text>
+              手をあげて開催するイベントの情報を登録してください。<br>
+              登録された情報は<b>あつまっている人全員</b>に通知されます。
+            </v-card-text>
+
+            <v-card-text>
+              <v-text-field
+                v-model="email"
+                label="メールアドレス"
+                placeholder="user@atsumaru.example"
+              />
+            </v-card-text>
+
+            <v-card-text>
+              <v-textarea
+                v-model="message"
+                label="イベント情報"
+                placeholder=""
+              />
+            </v-card-text>
+
+            <v-divider />
+
+            <v-card-actions class="dialog-footer">
+              <v-spacer />
+              <v-btn
+                color="primary"
+                @click="submitToOpen"
+              >
+                手をあげる
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-layout>
     </v-container>
     <v-container class="sns">
@@ -157,11 +205,14 @@
 <script>
   import EventStore from '../models/EventStore.js'
   import MemberStore from '../models/MemberStore.js'
+  import HistoryStore from '../models/HistoryStore.js'
   export default {
     data () {
       return {
-        dialog: false,
+        join: false,
+        open: false,
         email: '',
+        message: '',
         text: '',
         items: [],
         search: '',
@@ -201,6 +252,17 @@
         MemberStore.dispatch('postMember', {
           eventId: this.$data.eventId,
           email: this.$data.email
+        }).then(() => {
+          this.$data.join = false
+          EventStore.dispatch('getEvent', this.$data.eventId)
+        })
+      },
+      submitToOpen () {
+        HistoryStore.dispatch('postHistory', {
+          eventId: this.$data.eventId,
+          message: this.$data.message
+        }).then(() => {
+          this.$data.open = false
         })
       }
     }

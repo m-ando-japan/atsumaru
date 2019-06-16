@@ -88,5 +88,6 @@ module.exports = class Event {
         return response.sendStatus(403);
       });
     }
+    return response.sendStatus(500);
   }
 };

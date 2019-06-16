@@ -7,7 +7,7 @@ Vue.use(Vuex)
 //  データストア
 var HistoryStore = new Vuex.Store({
     mutations: {
-      postMember (state, response) {
+      postHistory (state, response) {
         console.log(response)
       }
     },

@@ -29,5 +29,7 @@ module.exports = class Member {
       });
 
     }
+
+    return response.sendStatus(500);
   }
 }
