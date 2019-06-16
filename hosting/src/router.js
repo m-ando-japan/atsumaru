@@ -22,6 +22,11 @@ export default new Router({
       path: '/view',
       name: 'view',
       component: () => import('./components/ViewEvent.vue')
+    },
+    {
+      path: '/raise',
+      name: 'raise',
+      component: () => import('./components/RaiseHand.vue')
     }
   ]
 })

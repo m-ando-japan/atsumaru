@@ -1,73 +1,93 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-layout
-        row
-        wrap
-      >
-        <v-flex
-          xs12
-          sm12
-          md12
+  <div class="inputFileld">
+    <v-form>
+      <v-container>
+        <v-layout
+          row
+          wrap
         >
-          <v-text-field
-            label="テーマ"
-            placeholder="____で____する"
-          />
-        </v-flex>
-        <v-flex
-          xs8
-          sm6
-          md6
-        >
-          <v-text-field
-            label="場所"
-            placeholder="____県____市"
-          />
-        </v-flex>
-        <v-flex xs12>
-          <v-combobox
-            v-model="select"
-            class="tag-input"
-            label="Tags"
-            append-icon
-            chips
-            deletable-chips
-            multiple
-            :search-input.sync="search"
-            @keyup.tab="updateTags"
-            @paste="updateTags"
-          />
-        </v-flex>
-        <v-flex xs12>
-          <v-btn
-            block
-            large
-            color="success"
-            @click="createEvent"
+          <v-flex
+            xs12
+            sm12
+            md12
           >
-            呼びかける
-          </v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-form>
+            <v-text-field
+              label="テーマ"
+              placeholder="____で____する"
+              :value="Theme"
+              @input="doUpdate"
+            />
+          </v-flex>
+          <v-flex
+            xs8
+            sm6
+            md6
+          >
+            <v-text-field
+              label="場所"
+              placeholder="____県____市"
+              :value="Address"
+              @input="doUpdate"
+            />
+          </v-flex>
+          <v-flex xs12>
+            <v-combobox
+              v-model="select"
+              class="tag-input"
+              label="Tags"
+              append-icon
+              chips
+              deletable-chips
+              multiple
+              :search-input.sync="search"
+              @keyup.tab="updateTags"
+              @paste="updateTags"
+            />
+          </v-flex>
+          <v-flex xs12>
+            <v-btn
+              block
+              large
+              color="success"
+              @click="createEvent"
+            >
+              呼びかける
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-form>
+  </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
+  import EventStore from '../models/EventStore.js'
+  
   export default {
     data () {
       return {
         text: '',
         chip3: true,
-        select: ['add-tags-with', 'enter', 'tab', 'paste'],
+        select: [],
         items: [],
         search: '' // sync search
       }
     },
+    name: 'inputFileld',
+    computed: {
+      message () { return this.$store.getters.message },
+      ...mapGetters('Theme', ['theme']),
+      ...mapGetters('Address', ['address']),
+      ...mapGetters('Tags', ['tags']),
+    },
     methods: {
       createEvent () {
-        this.$router.push('/view?eventId=JdObKeA6YdF7jSAcp96K')
+        //console.log(this.$store.getters.message);
+        //EventStore.dispatch('createEvent', this.Theme,this,Address,this.Tags)
+        EventStore.dispatch('createEvent', 'themeTest','広島県広島市','tag1')
+        //this.$router.push('/view?eventId=JdObKeA6YdF7jSAcp96K')
       },
       updateTags () {
         this.$nextTick(() => {
@@ -76,7 +96,10 @@
             this.search = ''
           })
         })
-      }
+      },
+      doUpdate (event) {
+        this.$store.dispatch('doUpdate', event.target.value)
+      },
     }
   }
 </script>

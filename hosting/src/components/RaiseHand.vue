@@ -5,104 +5,21 @@
         row
         wrap
       >
-        <v-flex
-          class="headline"
-          xs12
-          sm12
-          md12
-        >
-          <v-text-field
-            label="テーマ"
-            :value="event.theme"
-            placeholder="loading..."
-            readonly
-          />
-        </v-flex>
-        <v-flex
-          class="headline"
-          xs8
-          sm6
-          md6
-        >
-          <v-text-field
-            label="場所"
-            :value="event.address"
-            placeholder="loading..."
-            readonly
-          />
-        </v-flex>
-        <v-flex
-          xs4
-          sm6
-          md6
-          edit-event
-        >
-          <v-btn
-            fab
-            large
-            color="blue-grey"
-            @click="editEvent"
-          >
-            <v-icon>
-              edit
-            </v-icon>
-          </v-btn>
-        </v-flex>
         <v-flex xs12>
-          <v-chip
-            v-for="tag in event.tags"
-            :key="tag"
-          >
-            <v-icon left>
-              label
-            </v-icon>
-            {{ tag }}
-          </v-chip>
-        </v-flex>
-        <v-flex
-          xs12
-          class="favorites"
-        >
-          <v-icon color="pink">
-            favorite
-          </v-icon>
-          <span>99</span>
-        </v-flex>
+        <v-textarea
+          name="input-7-1"
+          label="やること"
+          placeholder="こんなことやるからみんな集まれ"
+        ></v-textarea>
+      </v-flex>
+        
         <v-flex xs12>
           <v-btn
             block
             large
             color="success"
-          >
-            あつまる
-          </v-btn>
-        </v-flex>
-        <v-flex xs12>
-          <v-btn
-            block
-            large
-            color="success"
-            @click="raiseHand"
           >
             手をあげる
-          </v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="sns">
-      <v-layout
-        row
-      >
-        <v-flex
-          xs12
-        >
-          <v-btn
-            fab
-            large
-            class="twitter"
-            @click="shareOnTwitter"
-          >
-            <v-icon>fab fa-twitter</v-icon>
           </v-btn>
         </v-flex>
       </v-layout>
@@ -139,9 +56,6 @@
             this.search = ''
           })
         })
-      },
-      raiseHand () {
-        this.$router.push('/raise')
       },
       shareOnTwitter () {
         window.open(
