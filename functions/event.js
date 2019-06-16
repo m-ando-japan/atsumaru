@@ -39,7 +39,14 @@ module.exports = class Event {
         if (!doc.exists) {
           return response.sendStatus(404);
         }
-        return response.status(200).json(doc.data());
+        const event = doc.data();
+        const responseObject = {
+          theme: event.theme || '',
+          address: event.address || '',
+          tags: event.tags || [],
+          memberCount: event.members ? event.members.length : 0
+        };
+        return response.status(200).json();
       }).catch(e => {
         console.log('Error', e);
         response.sendStatus(500);
