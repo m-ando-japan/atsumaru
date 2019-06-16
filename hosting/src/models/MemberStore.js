@@ -6,15 +6,24 @@ Vue.use(Vuex)
 
 //  データストア
 var MemberStore = new Vuex.Store({
-    mutations: {
-      postMember (state, response) {
-        console.log(response)
-      }
-    },
-    actions: {
+  state: {
+    member: ''
+  },
+  mutations: {
+    postMember (state, response) {
+      console.log(response)
+      state.event = response.data
+    }
+  },
+  getters: {
+    member (state, getters, rootState, rootGetters) {
+      return state.member
+    }
+  },
+  actions: {
       postMember ({ commit }, params) {
         console.log(params)
-        axios.post('https://us-central1-dev-atsumaru.cloudfunctions.net/member', params)
+        axios.post('https://us-central1-atsumaru-pe.cloudfunctions.net/member', params)
           .then(response => {
             if (response.status === 200) {
               console.log(response)

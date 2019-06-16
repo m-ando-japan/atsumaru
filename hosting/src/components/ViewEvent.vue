@@ -66,7 +66,7 @@
           <v-icon color="pink">
             favorite
           </v-icon>
-          <span>{{ (event.messages) ? event.messages.length : '0' }}</span>
+          <span>{{ event.memberCount }}</span>
         </v-flex>
         <v-flex xs12>
           <v-btn
@@ -221,7 +221,15 @@
     },
     computed: {
       event () {
+        console.log(EventStore.getters.event)
         return EventStore.getters.event
+      },
+      history () {
+        return HistoryStore.getters.history
+      },
+      member () {
+        EventStore.dispatch('getEvent', this.$data.eventId)
+        return HistoryStore.getters.member
       }
     },
     mounted () {
@@ -244,7 +252,7 @@
         window.open(
           'https://twitter.com/intent/tweet' +
             '?text=' + encodeURIComponent('"' + EventStore.getters.event.theme + '"呼びかけを応援します！ | ') +
-            '&hashtags=' + EventStore.getters.event.address + ',' + EventStore.getters.event.tags.join(',') + ',atsumaru' +
+            '&hashtags=' + EventStore.getters.event.address + ',' + EventStore.getters.event.tags.join(',') + ',atsumaru,hiroshimahack' +
             '&url=' + location.origin + '/view?eventId=' + this.$data.eventId
         )
       },
@@ -252,18 +260,15 @@
         MemberStore.dispatch('postMember', {
           eventId: this.$data.eventId,
           email: this.$data.email
-        }).then(() => {
-          this.$data.join = false
-          EventStore.dispatch('getEvent', this.$data.eventId)
         })
+        this.$data.join = false
       },
       submitToOpen () {
         HistoryStore.dispatch('postHistory', {
           eventId: this.$data.eventId,
           message: this.$data.message
-        }).then(() => {
-          this.$data.open = false
         })
+        this.$data.open = false
       }
     }
   }

@@ -12,9 +12,9 @@
             md12
           >
             <v-text-field
+              v-model="theme"
               label="テーマ"
               placeholder="____で____する"
-              v-model="theme"
             />
           </v-flex>
           <v-flex
@@ -23,9 +23,9 @@
             md6
           >
             <v-text-field
+              v-model="address"
               label="場所"
               placeholder="____県____市"
-              v-model="address"
             />
           </v-flex>
           <v-flex xs12>
@@ -61,7 +61,7 @@
 
 <script>
   import EventStore from '../models/EventStore.js'
-  
+
   export default {
     data () {
       return {
@@ -69,21 +69,25 @@
         chip3: true,
         select: [],
         items: [],
-        theme: "",
-        address: "",
+        theme: '',
+        address: '',
         search: '', // sync search
-        eventId: ""
+        eventId: ''
       }
     },
     methods: {
       createEvent () {
-        console.log('theme:' + this.$data.theme);
-        console.log('address:' + this.$data.address);
-        console.log('tags:' + this.$data.select);
-        EventStore.dispatch('createEvent', this.$data.theme,this.$data.address,this.$data.select)
+        console.log('theme:' + this.$data.theme)
+        console.log('address:' + this.$data.address)
+        console.log('tags:' + this.$data.select)
+        EventStore.dispatch('createEvent', {
+          theme: this.$data.theme,
+          address: this.$data.address,
+          select: this.$data.select
+        })
 
-        console.log('eventId:' + EventStore.getters.eventId);
-        this.$router.push('/view?' + EventStore.getters.eventId);
+        console.log('eventId:' + EventStore.getters.eventId)
+        this.$router.push('/view?eventId=' + EventStore.getters.eventId)
       },
       updateTags () {
         this.$nextTick(() => {
@@ -92,7 +96,7 @@
             this.search = ''
           })
         })
-      },
+      }
     }
   }
 </script>

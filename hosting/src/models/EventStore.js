@@ -8,15 +8,15 @@ Vue.use(Vuex)
 var EventStore = new Vuex.Store({
     state: {
       event: 'Loading.....',
-      eventId: '',
+      eventId: ''
     },
     mutations: {
       getEvent (state, response) {
         state.event = response.data
       },
-      setEventId(state, Id) {
+      setEventId (state, Id) {
         state.eventId = Id
-      },
+      }
     },
     getters: {
       event (state, getters, rootState, rootGetters) {
@@ -24,27 +24,28 @@ var EventStore = new Vuex.Store({
       },
       eventId (state, getters, rootState, rootGetters) {
         return state.eventId
-      },
+      }
     },
     actions: {
-        createEvent ({ commit }, theme, address, tags) {
-            console.log('eventId');
-            commit('setEventId', 'eventId=E7rRMnobT9ZwiwjHTJmF')
+        createEvent ({ commit }, params) {
+            console.log('eventId')
+            commit('setEventId', 'Tx2Si7wjA35E8S3rALGj')
             axios({
-                method : 'POST',
-                url    : 'https://us-central1-dev-atsumaru.cloudfunctions.net/event',
-                data   : { theme : 'theme', address : 'address' ,tags:'tags'} })
+                method: 'POST',
+                url: 'https://us-central1-atsumaru-pe.cloudfunctions.net/event',
+                data: params })
             .then(response => {
                 if (response.status === 200) {
                     commit('setEventId', response.data.id)
                 }
             })
             .catch(function (error) {
-                console.log(error);
-            });
+              commit('setEventId', 'Tx2Si7wjA35E8S3rALGj')
+              console.log(error)
+            })
         },
         getEvent ({ commit }, eventId) {
-        axios.get('https://us-central1-dev-atsumaru.cloudfunctions.net/event?eventId=' + eventId)
+        axios.get('https://us-central1-atsumaru-pe.cloudfunctions.net/event?eventId=' + eventId)
           .then(response => {
             if (response.status === 200) {
               commit('getEvent', response)
