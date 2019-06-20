@@ -8,7 +8,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "test": "curl -X POST -d -v https://us-central1-atsumaru-803b0.cloudfunctions.net/addMessage?text=123",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "test": "mocha"
   },
   "engines": {
     "node": "8"
@@ -19,9 +20,11 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.1.6",
+    "mocha": "^6.1.4"
   },
   "private": true
 }
